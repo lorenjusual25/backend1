@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "title": "Producto 1",
+    "description": "Descripción del producto 1",
+    "price": 100,
+    "thumbnail": "img1.jpg",
+    "stock": 10,
+    "status": true,
+    "category": "Categoría A"
+  },
+  {
+    "id": 3,
+    "title": "Producto de prueba",
+    "description": "Descripción de prueba",
+    "price": 100,
+    "thumbnail": "img.jpg",
+    "stock": 50,
+    "status": true,
+    "category": "Electrónica"
+  },
+  {
+    "id": 4,
+    "title": "qui",
+    "description": "Non expedita nulla vel nisi nemo commodi facilis vero. Quia animi rerum accusamus quidem et delectus. Perspiciatis et consectetur eaque enim et. Explicabo minus accusantium veritatis beatae praesentium velit odio consequatur. Eius saepe quo esse consectetur quae odio aspernatur aut dicta.",
+    "price": 23.06,
+    "thumbnail": "",
+    "stock": 556,
+    "status": true,
+    "category": "SCSI"
+  },
+  {
+    "id": 5,
+    "title": "sequi",
+    "description": "Ducimus aliquam ut architecto dolor est qui qui et adipisci. Velit nisi velit. Nihil et qui voluptatem ad dicta. Unde porro iste iusto dolorem dolorem ut esse delectus quis. Voluptates illo voluptas alias velit repellat illo ea velit delectus.",
+    "price": 100.13,
+    "thumbnail": "",
+    "stock": 641,
+    "status": false,
+    "category": "EXE"
+  },
+  {
+    "id": 6,
+    "title": "enim",
+    "description": "Et cupiditate qui animi dolor itaque consequuntur in a. Id vero dolorum fugiat voluptas nisi et et.",
+    "price": 470.23,
+    "thumbnail": "",
+    "stock": 12,
+    "status": true,
+    "category": "XML"
+  }
+]
