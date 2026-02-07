@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "title": "Producto 1",
+    "title": "titulo actualizado en put",
     "description": "Descripción del producto 1",
     "price": 100,
     "thumbnail": "img1.jpg",

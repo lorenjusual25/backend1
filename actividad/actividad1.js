@@ -1,7 +1,21 @@
-console.log("hola desde aqui")
+import fs from 'fs'
 class ProductManager {
     constructor () {
-        this.products = []
+        this.path = "./products.json"
+        this.products = this.cargar()
+    }
+    cargar() {
+        try {
+            if (fs.existsSync(this.path)) {
+                const data = fs.readFileSync(this.path, "utf-8")
+                return JSON.parse(data)
+            }
+            return []
+        }
+        catch (error) {
+            console.error("Error al cargar los productos:", error)
+            return []
+        }
     }
     addProduct (product) {
         if (!product.title || !product.description || !product.price || !product.thumbnail || !product.id || !product.stock || !product.status || !product.category) {
