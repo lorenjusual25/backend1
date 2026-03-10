@@ -1,0 +1,72 @@
+import fs from 'fs'
+import { __dirname } from '../util.js'
+class ProductManager {
+    constructor () {
+        this.path = __dirname + "/dao/data/products.json"
+        this.products = this.cargar()
+    }
+    cargar() {
+        try {
+            if (fs.existsSync(this.path)) {
+                const data = fs.readFileSync(this.path, "utf-8")
+                return JSON.parse(data)
+            }
+            return []
+        }
+        catch (error) {
+            console.error("Error al cargar los productos:", error)
+            return []
+        }
+    }
+    guardar() {
+        try {
+            fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2))
+        }
+        catch (error) {
+            console.error("Error al guardar los productos:", error)
+        }
+    }
+    addProduct (product) {
+        if (!product.title || !product.description || !product.price || !product.thumbnail || !product.id || !product.stock || product.status === undefined || product.status === null || !product.category) {
+            console.error("Faltan campos")
+            return
+        }
+        if (this.products.some(p => p.id === product.id)){
+            console.error("ID repetido")
+            return
+        }
+        this.products.push(product)
+        this.guardar()
+    }
+    getProducts() {
+        return this.products
+    }
+    getProductByID (id) {
+        const producto = this.products.find(p => p.id === id)
+        if (!producto){
+            console.error("not found")
+            return
+        }
+        return producto
+    }
+    createProduct (product) {
+        const newProduct = {
+            id: this.products.length + 1,
+            ...product
+        }
+        this.products.push(newProduct)
+        this.guardar()
+        return newProduct
+    }
+    deleteProduct (id) {
+        const previoLength = this.products.length
+        this.products = this.products.filter(p => p.id !== id)
+        if (this.products.length === previoLength) {
+            console.error("Producto no encontrado")
+            return false
+        }
+        this.guardar()
+        return true
+    }
+}
+export default ProductManager

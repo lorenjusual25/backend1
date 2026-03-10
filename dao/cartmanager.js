@@ -1,7 +1,8 @@
 import fs from "fs"
+import { __dirname } from "../util.js"
 class CartManager {
     constructor() {
-        this.path = "./carts.json"
+        this.path = __dirname + "/data/carts.json"
         this.carts = this.cargar()
     }
     cargar() {

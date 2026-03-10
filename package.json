@@ -14,5 +14,9 @@
     "express": "^5.2.1",
     "nodemon": "^3.1.11"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "express-handlebars": "^8.0.6",
+    "socket.io": "^4.8.3"
+  }
 }

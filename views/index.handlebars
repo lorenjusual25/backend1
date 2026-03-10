@@ -1,0 +1,10 @@
+{{#each products}}
+    {{#if this.status}}
+        <div>
+            <h2>{{this.title}}</h2>
+            <p>{{this.description}}</p>
+            <p>Precio: {{this.price}}</p>
+            <p>Stock: {{this.stock}}</p>
+        </div>
+    {{/if}}
+{{/each}}
