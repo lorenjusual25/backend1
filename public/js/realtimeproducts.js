@@ -1,25 +1,18 @@
 const socket = io()
-function renderProducts (products) {
-    const container = document.getElementById('productsContainer')
-    container.innerHTML = products.map(product => `
-        <div data-code="${product.code}">
-            <h2>${product.title}</h2>
-            <p>${product.description}</p>
-            <p>Precio: $${product.price}</p>
-            <p>Stock: ${product.stock}</p>
-            <button class="deleteBtn" data-code="${product.code}">BORRAR</button>
-        </div>
-    `).join('')
-    document.querySelectorAll('.deleteBtn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const code = btn.getAttribute('data-code')
-            socket.emit('deleteProduct', Number(code))
-        })
+socket.on('products', () => {
+    window.location.reload()
+})
+document.querySelectorAll('.deleteBtn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id')
+        socket.emit('deleteProduct', id)
     })
-}
-
-socket.on("products", (products) => {
-    renderProducts(products)
+})
+document.querySelectorAll('.detailsBtn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id')
+        window.location.href = `realtimeproducts/${id}`
+    })
 })
 
 document.getElementById('productForm').addEventListener('submit', (e) => {

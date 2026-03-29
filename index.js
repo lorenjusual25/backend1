@@ -1,4 +1,4 @@
-import express, { urlencoded } from 'express'
+import express from 'express'
 import productsRouter from './routers/products.routes.js'
 import cartsRouter from './routers/carts.routes.js'
 import viewsRouter from './routers/views.routes.js'
@@ -24,7 +24,7 @@ app.use("/api/products", productsRouter)
 //CARRITOS
 app.use("/api/carts", cartsRouter)
 //VIEWS
-app.use("/", viewsRouter)
+app.use("/realtimeproducts", viewsRouter)
 const httpServer = app.listen(PORT, () => {
     console.log(`Escuchando puerto en ${PORT}`)
     mongoose.connect('mongodb://lsuareza2005_db_user:Z5BeduuVitnfHWt5@ac-q12kq7a-shard-00-00.zjlv4ty.mongodb.net:27017,ac-q12kq7a-shard-00-01.zjlv4ty.mongodb.net:27017,ac-q12kq7a-shard-00-02.zjlv4ty.mongodb.net:27017/?ssl=true&replicaSet=atlas-11l0md-shard-0&authSource=admin&appName=Cluster0')
@@ -37,10 +37,10 @@ io.on("connection", async (socket) => {
     socket.on('createProduct', async (product) => {
         const count = await productModel.countDocuments()
         await productModel.create({code:count + 1, ...product })
-        io.emit('products', await productModel.find().lean())
+        io.emit('products')
     })
-    socket.on('deleteProduct', async (code) => {
-        await productModel.findOneAndDelete({code})
-        io.emit('products', await productModel.find().lean())
+    socket.on('deleteProduct', async (id) => {
+        await productModel.findByIdAndDelete(id)
+        io.emit('products')
     })
 })

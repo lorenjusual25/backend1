@@ -11,7 +11,7 @@ router.post("/", async (req,res) => {
 })
 router.get("/:cid", async (req,res) => {
     const {cid} = req.params
-    const cart = await cartModel.findOne({_id:cid})
+    const cart = await cartModel.findById(cid).populate("products.product").lean()
     if (!cart) 
         return res.status(404).json({error:"carrito no encontrado en get"})
     res.json(cart)
@@ -54,9 +54,34 @@ router.put("/:cid", async (req,res) => {
     const {cid} = req.params
     const {products} = req.body
     const cart = await cartModel.findById(cid)
-    if (!cart)
+    if (!cart){
         return res.status(404).json({error:"carrito no encontrado"})
+    }
     const updatedCart = await cartModel.findByIdAndUpdate(cid, {products}, {new: true})
     res.json({message:"Carrito actualizado", cart: updatedCart})
+})
+router.put("/:cid/product/:pid", async (req,res) => {
+    const {cid, pid} = req.params
+    const {quantity} = req.body
+    const cart = await cartModel.findById(cid)
+    if (!cart){
+        return res.status(404).json({error:"carrito no encontrado"})
+    }
+    const product = cart.products.find(p => p.product == pid)
+    if (!product){
+        return res.status(404).json({error: "producto no encontrado"})
+    }
+    product.quantity = quantity
+    const updatedCart = await cartModel.findByIdAndUpdate(cid, {products: cart.products}, {new: true})
+    res.json({message:"Cantidad actualizada", cart: updatedCart})
+})
+router.delete("/:cid", async (req,res) => {
+    const {cid} = req.params
+    const cart = await cartModel.findById(cid)
+    if (!cart){
+        return res.status(404).json({error:"carrito no encontrado"})
+    }
+    const updatedCart = await cartModel.findByIdAndUpdate(cid, {products: []}, {new: true})
+    res.status(200).json({message:"todos los productos eliminados", cart: updatedCart})
 })
 export default router

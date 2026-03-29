@@ -15,17 +15,23 @@
 <h2>Productos:</h2> <br>
 <div id="productsContainer">
     {{#each pagination.docs}}
-        <div data-code="{{this.code}}">
+        <div data-id="{{this._id}}">
             <h2>{{this.title}}</h2>
             <p>{{this.description}}</p>
             <p>Precio: ${{this.price}}</p>
             <p>Stock: {{this.stock}}</p>
-            <button class="deleteBtn" data-code="{{this.code}}">BORRAR</button>
+            <button class="deleteBtn" data-id="{{this._id}}">BORRAR</button>
+            <button class="detailsBtn" data-id="{{this._id}}">DETALLES</button>
         </div>
     {{/each}}
 </div>
 <br>
-<a href="/realtimeproducts?page={{pagination.prevPage}}">{{pagination.prevPage}}</a>
-<a href="/realtimeproducts?page={{pagination.nextPage}}">{{pagination.nextPage}}</a>
+{{#if pagination.hasPrevPage}}
+    <a href="/realtimeproducts?page={{pagination.prevPage}}"><</a>
+{{/if}}
+<a href="/realtimeproducts?page={{pagination.page}}">{{pagination.page}}</a>
+{{#if pagination.hasNextPage}}
+    <a href="/realtimeproducts?page={{pagination.nextPage}}">></a>
+{{/if}}
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/realtimeproducts.js"></script>

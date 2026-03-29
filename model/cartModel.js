@@ -11,7 +11,9 @@ const cartSchema = new Schema({
         default: []
     },
 })
-cartSchema.pre("findOne", function() {
-    this.populate("products.product")
-})
+//Lo tuve que comentar ya que por alguna razon al guardar el mismo producto en el carrito, se me creaba como uno nuevo
+//y no se me actualizaba la cantidad
+//cartSchema.pre("findOne", function() {
+//    this.populate("products.product")
+//})
 export const cartModel = model("cart", cartSchema)

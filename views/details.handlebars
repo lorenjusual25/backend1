@@ -1,0 +1,29 @@
+<h1>{{product.title}}</h1>
+<p>{{product.description}}</p>
+<p>Price: ${{product.price}}</p>
+<p>Stock: {{product.stock}}</p>
+<p>Status: 
+    {{#if product.status}}
+        Disponible
+    {{else}}
+        No disponible
+    {{/if}}
+</p>
+<p>Category: {{product.category}}</p>
+<button class="addBtn" data-id="{{product._id}}">Agregar al carrito</button>
+
+<script>
+    const cartIdPrueba = "69c96b8236b6feeebd50c596" //puse este id de carrito para simplificar
+    document.querySelector('.addBtn').addEventListener('click', () => {
+        const id = document.querySelector('.addBtn').getAttribute('data-id')
+        fetch(`/api/carts/${cartIdPrueba}/product/${id}`, {
+            method: 'POST'
+        }).then(res => {
+            if (res.ok) {
+                alert("Producto agregado al carrito")
+            } else {
+                alert("Error al agregar el producto al carrito")
+            }
+        })
+     })
+</script>
