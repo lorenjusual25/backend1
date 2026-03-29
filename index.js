@@ -1,12 +1,14 @@
-import express from 'express'
+import express, { urlencoded } from 'express'
 import productsRouter from './routers/products.routes.js'
 import cartsRouter from './routers/carts.routes.js'
 import viewsRouter from './routers/views.routes.js'
 import handlebars from "express-handlebars"
 import {__dirname} from "./util.js"
 import { Server } from "socket.io"
-import ProductManager from './dao/productmanager.js' //necesario tener los productos desde el server
-const productManager = new ProductManager()
+//import ProductManager from './dao/productmanager.js'
+import mongoose from 'mongoose'
+import { productModel } from './model/productModel.js'
+//const productManager = new ProductManager()
 const app = express()
 const PORT = 3000
 //Handlebars
@@ -25,20 +27,20 @@ app.use("/api/carts", cartsRouter)
 app.use("/", viewsRouter)
 const httpServer = app.listen(PORT, () => {
     console.log(`Escuchando puerto en ${PORT}`)
+    mongoose.connect('mongodb://lsuareza2005_db_user:Z5BeduuVitnfHWt5@ac-q12kq7a-shard-00-00.zjlv4ty.mongodb.net:27017,ac-q12kq7a-shard-00-01.zjlv4ty.mongodb.net:27017,ac-q12kq7a-shard-00-02.zjlv4ty.mongodb.net:27017/?ssl=true&replicaSet=atlas-11l0md-shard-0&authSource=admin&appName=Cluster0')
+    .then(() => console.log('Conectado a la DB'))
+    .catch((error) => console.error(error))
 })
 const io = new Server(httpServer)
-io.on("connection", (socket) => {
+io.on("connection", async (socket) => {
     console.log("Nuevo cliente conectado: " + socket.id)
-    //enviar los productos al cliente que se conectó
-    socket.emit('products', productManager.getProducts())
-    //recibir evento de agregar un producto por parte del cliente
-    socket.on('createProduct', (product) => {
-        productManager.createProduct(product)
-        io.emit('products', productManager.getProducts())
+    socket.on('createProduct', async (product) => {
+        const count = await productModel.countDocuments()
+        await productModel.create({code:count + 1, ...product })
+        io.emit('products', await productModel.find().lean())
     })
-    //o el evento de elminar
-    socket.on('deleteProduct', (id) => {
-        productManager.deleteProduct(id)
-        io.emit('products', productManager.getProducts())
+    socket.on('deleteProduct', async (code) => {
+        await productModel.findOneAndDelete({code})
+        io.emit('products', await productModel.find().lean())
     })
 })

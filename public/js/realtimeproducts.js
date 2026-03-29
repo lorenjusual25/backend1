@@ -2,18 +2,18 @@ const socket = io()
 function renderProducts (products) {
     const container = document.getElementById('productsContainer')
     container.innerHTML = products.map(product => `
-        <div data-id="${product.id}">
+        <div data-code="${product.code}">
             <h2>${product.title}</h2>
             <p>${product.description}</p>
             <p>Precio: $${product.price}</p>
             <p>Stock: ${product.stock}</p>
-            <button class="deleteBtn" data-id="${product.id}">BORRAR</button>
+            <button class="deleteBtn" data-code="${product.code}">BORRAR</button>
         </div>
     `).join('')
     document.querySelectorAll('.deleteBtn').forEach(btn => {
         btn.addEventListener('click', () => {
-            const id = btn.getAttribute('data-id')
-            socket.emit('deleteProduct', Number(id))
+            const code = btn.getAttribute('data-code')
+            socket.emit('deleteProduct', Number(code))
         })
     })
 }

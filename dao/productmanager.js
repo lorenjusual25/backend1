@@ -27,12 +27,12 @@ class ProductManager {
         }
     }
     addProduct (product) {
-        if (!product.title || !product.description || !product.price || !product.thumbnail || !product.id || !product.stock || product.status === undefined || product.status === null || !product.category) {
+        if (!product.title || !product.description || !product.price || !product.thumbnail || !product.code || !product.stock || product.status === undefined || product.status === null || !product.category) {
             console.error("Faltan campos")
             return
         }
-        if (this.products.some(p => p.id === product.id)){
-            console.error("ID repetido")
+        if (this.products.some(p => p.code === product.code)){
+            console.error("CODE repetido")
             return
         }
         this.products.push(product)
@@ -41,8 +41,8 @@ class ProductManager {
     getProducts() {
         return this.products
     }
-    getProductByID (id) {
-        const producto = this.products.find(p => p.id === id)
+    getProductByCode (code) {
+        const producto = this.products.find(p => p.code === code)
         if (!producto){
             console.error("not found")
             return
@@ -50,17 +50,18 @@ class ProductManager {
         return producto
     }
     createProduct (product) {
+        const maxCode = this.products.reduce((max, p) => Math.max(max, p.code || 0), 0)
         const newProduct = {
-            id: this.products.length + 1,
+            code: maxCode + 1,
             ...product
         }
         this.products.push(newProduct)
         this.guardar()
         return newProduct
     }
-    deleteProduct (id) {
+    deleteProduct (code) {
         const previoLength = this.products.length
-        this.products = this.products.filter(p => p.id !== id)
+        this.products = this.products.filter(p => p.code !== code)
         if (this.products.length === previoLength) {
             console.error("Producto no encontrado")
             return false

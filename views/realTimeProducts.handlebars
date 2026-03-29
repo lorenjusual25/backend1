@@ -14,15 +14,18 @@
 </form>
 <h2>Productos:</h2> <br>
 <div id="productsContainer">
-    {{#each products}}
-        <div data-id="{{this.id}}">
+    {{#each pagination.docs}}
+        <div data-code="{{this.code}}">
             <h2>{{this.title}}</h2>
             <p>{{this.description}}</p>
             <p>Precio: ${{this.price}}</p>
             <p>Stock: {{this.stock}}</p>
-            <button class="deleteBtn" data-id="{{this.id}}">BORRAR</button>
+            <button class="deleteBtn" data-code="{{this.code}}">BORRAR</button>
         </div>
     {{/each}}
 </div>
+<br>
+<a href="/realtimeproducts?page={{pagination.prevPage}}">{{pagination.prevPage}}</a>
+<a href="/realtimeproducts?page={{pagination.nextPage}}">{{pagination.nextPage}}</a>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/realtimeproducts.js"></script>

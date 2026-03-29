@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "code": 1,
     "title": "titulo actualizado",
     "description": "Nihil voluptatem aut quos sint et eum vel. Voluptatem dolores ea laboriosam. Consequatur pariatur veritatis rerum cum quo libero. Distinctio magni voluptatem quia aut temporibus omnis. Dolor molestiae iure voluptatem voluptate sint. Velit quidem unde soluta quia.",
     "price": 188.56,
@@ -10,7 +10,7 @@
     "category": "IB"
   },
   {
-    "id": 2,
+    "code": 2,
     "title": "Eius explicabo omnis assumenda sunt eligendi laudantium odit.",
     "description": "Et et fugit minima excepturi pariatur nam. Et adipisci magni nobis officia et dolore. Molestias ipsum recusandae. Alias dolore consectetur ipsa est nisi qui aut sapiente omnis. Et qui id et. Harum illum necessitatibus vero enim porro et quaerat temporibus est.",
     "price": 526.52,
@@ -20,7 +20,7 @@
     "category": "XML"
   },
   {
-    "id": 3,
+    "code": 3,
     "title": "Qui iure sed occaecati laudantium assumenda recusandae.",
     "description": "Voluptas autem quo quia rerum. Minima praesentium sit sed quo velit et. Architecto culpa sequi voluptatibus sapiente. Aut quo quam. Dolores qui minus ex vitae qui dolor. Blanditiis accusantium qui exercitationem totam iusto.",
     "price": 326.43,
@@ -30,7 +30,7 @@
     "category": "COM"
   },
   {
-    "id": 4,
+    "code": 4,
     "title": "Voluptates dolores deleniti rerum dolor cupiditate temporibus temporibus.",
     "description": "Aliquid autem enim. Repellat nisi reprehenderit dolor. Ea quaerat voluptatem aliquid quas assumenda enim.",
     "price": 54.54,
@@ -40,7 +40,7 @@
     "category": "SQL"
   },
   {
-    "id": 5,
+    "code": 5,
     "title": "Doloribus dolore doloremque et sit enim ex laudantium.",
     "description": "Id excepturi sed laborum eum. Voluptates fugit ut et rerum et. Non dicta qui qui consectetur perspiciatis atque molestiae. Est aliquid minus unde et. Qui quisquam laudantium impedit sunt. Et eaque dicta vitae et voluptas sed explicabo eius ad.",
     "price": 680.93,
@@ -50,7 +50,7 @@
     "category": "COM"
   },
   {
-    "id": 6,
+    "code": 6,
     "title": "nuevo prod",
     "description": "nueva desc",
     "price": 100,
@@ -60,7 +60,7 @@
     "category": "A"
   },
   {
-    "id": 7,
+    "code": 7,
     "title": "nuevo prod 2",
     "description": "nueva desc 2",
     "price": 200,

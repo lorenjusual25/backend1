@@ -17,6 +17,9 @@
   "type": "module",
   "dependencies": {
     "express-handlebars": "^8.0.6",
+    "mongodb": "^7.1.1",
+    "mongoose": "^9.3.3",
+    "mongoose-paginate-v2": "^1.9.4",
     "socket.io": "^4.8.3"
   }
 }
