@@ -8,6 +8,7 @@ import { Server } from "socket.io"
 //import ProductManager from './dao/productmanager.js'
 import mongoose from 'mongoose'
 import { productModel } from './model/productModel.js'
+import "dotenv/config"
 //const productManager = new ProductManager()
 const app = express()
 const PORT = 3000
@@ -27,7 +28,7 @@ app.use("/api/carts", cartsRouter)
 app.use("/realtimeproducts", viewsRouter)
 const httpServer = app.listen(PORT, () => {
     console.log(`Escuchando puerto en ${PORT}`)
-    mongoose.connect('mongodb://lsuareza2005_db_user:Z5BeduuVitnfHWt5@ac-q12kq7a-shard-00-00.zjlv4ty.mongodb.net:27017,ac-q12kq7a-shard-00-01.zjlv4ty.mongodb.net:27017,ac-q12kq7a-shard-00-02.zjlv4ty.mongodb.net:27017/?ssl=true&replicaSet=atlas-11l0md-shard-0&authSource=admin&appName=Cluster0')
+    mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('Conectado a la DB'))
     .catch((error) => console.error(error))
 })
